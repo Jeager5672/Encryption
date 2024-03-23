@@ -5,11 +5,21 @@ import os
 from cryptography.fernet import Fernet, InvalidToken
 from cryptography.hazmat.primitives import hashes
 from cryptography.hazmat.primitives.kdf.pbkdf2 import PBKDF2HMAC
+from PIL import Image, ImageTk
+
+image = Image.open("Remove-bg.ai_1708437756203.png")
+image = image.resize((150, 150))
 
 window = Tk()
 window.title("Secret Notes")
 window.minsize(width=400, height=400)
 window.config(padx=20, pady=20)
+
+# Görüntüyü Tkinter için uygun hale getirgit
+photo = ImageTk.PhotoImage(image)
+canvas = Canvas(window, width=200, height=155)
+canvas.create_image(100, 100, anchor=CENTER, image=photo)
+canvas.pack()
 
 title_label = Label(text="Enter the Title")
 title_label.config(fg="black", padx=10, pady=10)
